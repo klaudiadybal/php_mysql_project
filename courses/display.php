@@ -16,7 +16,7 @@ include '..\connect.php';
 <body>
     <div class="container">
         <button class="btn btn-dark my-5">
-            <a href="user.php" class="text-light text-decoration-none">Add</a>
+            <a href="course.php" class="text-light text-decoration-none">Add</a>
         </button>
         <table class="table table-bordered table-striped text-center">
             <thead>
