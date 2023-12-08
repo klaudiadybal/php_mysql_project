@@ -16,7 +16,7 @@ include '..\connect.php';
 <body>
     <div class="container">
         <button class="btn btn-dark my-5">
-            <a href="course.php" class="text-light text-decoration-none">Add</a>
+            <a href="group.php" class="text-light text-decoration-none">Add</a>
         </button>
         <button class="btn btn-dark my-5">
             <a href="../index.php" class="text-light text-decoration-none">Back to Home Page</a>
@@ -25,25 +25,28 @@ include '..\connect.php';
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Nazwa kursu</th>
-                    <th scope="col">Opis</th>
+                    <th scope="col">Kierunek studiów</th>
+                    <th scope="col">Typ grupy</th>
+                    <th scope="col">Nazwa grupy</th>
                     <th scope="col">Modyfikacja</th>
                 </tr>
             </thead>
             <tbody>
 
                 <?php
-                $sql = "select * from `kursy`";
+                $sql = "select * from `grupy`";
                 $result = mysqli_query($connection, $sql);
                 if($result) {
                     while($row = mysqli_fetch_assoc($result)) {
                         $id = $row['id'];
-                        $name = $row['nazwa_kursu'];
-                        $desc = $row['opis'];
+                        $field = $row['kierunek'];
+                        $type = $row['typ'];
+                        $name = $row['nazwa'];
                         echo '<tr>
                             <th scope="row">'.$id.'</th>
+                            <td>'.$field.'</td>
+                            <td>'.$type.'</td>
                             <td>'.$name.'</td>
-                            <td>'.$desc.'</td>
                             <td>
                                 <button class="btn btn-dark">
                                     <a href="update.php?updateid='.$id.'" class="text-light text-decoration-none">Update</a></button>

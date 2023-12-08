@@ -2,18 +2,20 @@
 include '../connect.php';
 
 $id=$_GET['updateid'];
-$sql="select * from `kursy` where id=$id";
+$sql="select * from `grupy` where id=$id";
 $result=mysqli_query($connection, $sql);
 $row=mysqli_fetch_assoc($result);
-$name=$row['nazwa_kursu'];
-$desc=$row['opis'];
+$field=$row['kierunek'];
+$type=$row['typ'];
+$name=$row['nazwa'];
 
 if(isset($_POST['submit'])) {
+  $field = $_POST['field'];
+  $type = $_POST['type'];
   $name = $_POST['name'];
-  $desc = $_POST['desc'];
 
-  $sql = "update `kursy` set nazwa_kursu='$name', 
-  opis='$desc' where id=$id";
+  $sql = "update `grupy` set kierunek='$field', 
+  typ='$type', nazwa='$name' where id=$id";
   $result = mysqli_query($connection, $sql);
 
   if($result) {
@@ -40,14 +42,19 @@ if(isset($_POST['submit'])) {
   <div class="container my-5">
     <form method="post">
       <div class="mb-3">
-        <label class="form-label">Nazwa kursu:</label>
-        <input type="text" class="form-control" placeholder="Podaj nazwę kursu" name="name"
-        value=<?php echo $name;?>>
+        <label class="form-label">Kierunek studiów:</label>
+        <input type="text" class="form-control" placeholder="Podaj nazwę kierunku" name="field"
+        value=<?php echo $field;?>>
       </div>
       <div class="mb-3">
-        <label class="form-label">Opis:</label>
-        <input type="text" class="form-control" placeholder="Podaj opis kursu" name="desc"
-        value=<?php echo $desc;?>>
+        <label class="form-label">Typ grupy:</label>
+        <input type="text" class="form-control" placeholder="Podaj typ gurpy" name="type"
+        value=<?php echo $type;?>>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Nazwa grupy:</label>
+        <input type="text" class="form-control" placeholder="Podaj nazwę gurpy" name="name"
+        value=<?php echo $name;?>>
       </div>
       <button type="submit" class="btn btn-dark my-5" name="submit">Update</button>
       <button class="btn btn-danger my-5">

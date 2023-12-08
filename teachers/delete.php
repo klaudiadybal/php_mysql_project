@@ -4,7 +4,7 @@
     if(isset($_GET['deleteid'])){
         $id=$_GET['deleteid'];
 
-        $sql="delete from `kursy` where id=$id";
+        $sql="delete from `nauczyciele` where id=$id";
         $result=mysqli_query($connection, $sql);
 
         if($result) {
