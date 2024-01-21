@@ -3,6 +3,10 @@ include '..\connect.php';
 
 $userId = $_GET['user_id'];
 
+if (isset($userId)) {
+    $redirectUrl = 'display.php?user_id=' . $userId;
+    header('Location: ' . $redirectUrl);
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,19 +23,14 @@ $userId = $_GET['user_id'];
 <body>
     <div class="container">
         <button class="btn btn-dark my-5">
-            <a href="course.php" class="text-light text-decoration-none">Dodaj</a>
+            <a href="../index.php" class="text-light text-decoration-none">Powrót</a>
         </button>
-        <a href="..\index.php<?php if (isset($_GET['user_id'])) echo '?user_id=' . $_GET['user_id']; ?>"
-            class="btn btn-dark text-white text-decoration-none" role="button">
-            Powrót
-        </a>
         <table class="table table-bordered table-striped text-center">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Nazwa kursu</th>
                     <th scope="col">Opis</th>
-                    <th scope="col">Modyfikacja</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,14 +47,6 @@ $userId = $_GET['user_id'];
                             <th scope="row">'.$id.'</th>
                             <td>'.$name.'</td>
                             <td>'.$desc.'</td>
-                            <td>
-                                <button class="btn btn-dark">
-                                    <a href="update.php?updateid='.$id.'" class="text-light text-decoration-none">Edytuj</a></button>
-                                </button>
-                                <button class="btn btn-danger">
-                                    <a href="delete.php?deleteid='.$id.'" class="text-light text-decoration-none">Usuń</a></button>
-                                </button>
-                            </td>
                         </tr>';
                     }
                 }

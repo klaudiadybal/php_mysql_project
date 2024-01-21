@@ -1,6 +1,8 @@
 <?php
 include '../connect.php';
 
+$userId = $_GET['user_id'];
+
 $id=$_GET['updateid'];
 $sql="select * from `nauczyciele` where id=$id";
 $result=mysqli_query($connection, $sql);
@@ -21,8 +23,8 @@ if(isset($_POST['submit'])) {
   where id=$id";
   $result = mysqli_query($connection, $sql);
 
-  if($result) {
-    header('location:display.php');
+  if ($result) {
+    header('location:display.php?user_id=' . $userId);
   } else {
     die(mysqli_error($connection));
   }
@@ -64,10 +66,11 @@ if(isset($_POST['submit'])) {
         <input type="number" class="form-control" placeholder="Podaj numer telefonu" name="phone"
         value=<?php echo $phone;?>>
       </div>
-      <button type="submit" class="btn btn-dark my-5" name="submit">Update</button>
+      <button type="submit" class="btn btn-dark my-5" name="submit">Zaktualizuj</button>
       <button class="btn btn-danger my-5">
-            <a href="display.php" class="text-light text-decoration-none">Cancel</a>
-      </button>
+                <a href="display.php?user_id=<?php echo $userId; ?>"
+                    class="text-light text-decoration-none">Anuluj</a>
+            </button>
     </form>
   </div>
 </body>

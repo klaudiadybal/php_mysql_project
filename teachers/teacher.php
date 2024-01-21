@@ -1,5 +1,8 @@
 <?php
 include '../connect.php';
+
+$userId = $_GET['user_id'];
+
 if(isset($_POST['submit'])) {
   $name = $_POST['name'];
   $last_name = $_POST['last_name'];
@@ -12,7 +15,7 @@ if(isset($_POST['submit'])) {
   $result = mysqli_query($connection, $sql);
 
   if($result) {
-    header('location:display.php');
+    header('location:display.php?user_id=' . $userId);
   } else {
     die(mysqli_error($connection));
   }
@@ -51,9 +54,9 @@ if(isset($_POST['submit'])) {
         <input type="number" class="form-control" placeholder="Podaj numer telefonu" name="phone">
       </div>
 
-      <button type="submit" class="btn btn-dark mt-5" name="submit">Submit</button>
+      <button type="submit" class="btn btn-dark mt-5" name="submit">Dodaj</button>
       <button class="btn btn-danger mt-5">
-            <a href="display.php" class="text-light text-decoration-none">Cancel</a>
+          <a href="display.php?user_id=<?php echo $userId; ?>" class="text-light text-decoration-none">Anuluj</a>
       </button>
     </form>
   </div>

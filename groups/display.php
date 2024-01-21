@@ -1,5 +1,8 @@
 <?php
 include '..\connect.php';
+
+$userId = $_GET['user_id'];
+
 ?>
 
 <!DOCTYPE html>
@@ -16,11 +19,12 @@ include '..\connect.php';
 <body>
     <div class="container">
         <button class="btn btn-dark my-5">
-            <a href="group.php" class="text-light text-decoration-none">Add</a>
+            <a href="group.php" class="text-light text-decoration-none">Dodaj</a>
         </button>
-        <button class="btn btn-dark my-5">
-            <a href="../index.php" class="text-light text-decoration-none">Back to Home Page</a>
-        </button>
+        <a href="..\index.php<?php if (isset($_GET['user_id'])) echo '?user_id=' . $_GET['user_id']; ?>"
+            class="btn btn-dark text-white text-decoration-none" role="button">
+            Powrót
+        </a>
         <table class="table table-bordered table-striped text-center">
             <thead>
                 <tr>
@@ -49,10 +53,10 @@ include '..\connect.php';
                             <td>'.$name.'</td>
                             <td>
                                 <button class="btn btn-dark">
-                                    <a href="update.php?updateid='.$id.'" class="text-light text-decoration-none">Update</a></button>
+                                    <a href="update.php?updateid='.$id.'" class="text-light text-decoration-none">Edytuj</a></button>
                                 </button>
                                 <button class="btn btn-danger">
-                                    <a href="delete.php?deleteid='.$id.'" class="text-light text-decoration-none">Delete</a></button>
+                                    <a href="delete.php?deleteid='.$id.'" class="text-light text-decoration-none">Usuń</a></button>
                                 </button>
                             </td>
                         </tr>';

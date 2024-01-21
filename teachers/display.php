@@ -1,5 +1,8 @@
 <?php
 include '..\connect.php';
+
+$userId = $_GET['user_id'];
+
 ?>
 
 <!DOCTYPE html>
@@ -16,10 +19,10 @@ include '..\connect.php';
 <body>
     <div class="container">
         <button class="btn btn-dark my-5">
-            <a href="teacher.php" class="text-light text-decoration-none">Add</a>
+            <a href="teacher.php?user_id=<?php echo $userId; ?>" class="text-light text-decoration-none">Dodaj</a>
         </button>
         <button class="btn btn-dark my-5">
-            <a href="../index.php" class="text-light text-decoration-none">Back to Home Page</a>
+            <a href="..\index.php?user_id=<?php echo $userId; ?>" class="text-light text-decoration-none">Powrót</a>
         </button>
         <table class="table table-bordered table-striped text-center">
             <thead>
@@ -51,12 +54,12 @@ include '..\connect.php';
                             <td>'.$email.'</td>
                             <td>'.$phone.'</td>
                             <td>
-                                <button class="btn btn-dark">
-                                    <a href="update.php?updateid='.$id.'" class="text-light text-decoration-none">Update</a></button>
-                                </button>
-                                <button class="btn btn-danger">
-                                    <a href="delete.php?deleteid='.$id.'" class="text-light text-decoration-none">Delete</a></button>
-                                </button>
+                            <button class="btn btn-dark">
+                                <a href="update.php?updateid='.$id.'&user_id='.$userId.'" class="text-light text-decoration-none">Edytuj</a></button>
+                            </button>
+                            <button class="btn btn-danger">
+                                <a href="delete.php?deleteid='.$id.'&user_id='.$userId.'" class="text-light text-decoration-none">Usuń</a></button>
+                            </button>
                             </td>
                         </tr>';
                     }
