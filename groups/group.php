@@ -1,5 +1,8 @@
 <?php
 include '../connect.php';
+
+$userId = $_GET['user_id'];
+
 if(isset($_POST['submit'])) {
   $field = $_POST['field'];
   $type = $_POST['type'];
@@ -11,7 +14,7 @@ if(isset($_POST['submit'])) {
   $result = mysqli_query($connection, $sql);
 
   if($result) {
-    header('location:display.php');
+    header('location:display.php?user_id=' . $userId);
   } else {
     die(mysqli_error($connection));
   }
@@ -45,9 +48,9 @@ if(isset($_POST['submit'])) {
         <label class="form-label">Nazwa grupy:</label>
         <input type="text" class="form-control" placeholder="Podaj nazwę grupy" name="name">
       </div>
-      <button type="submit" class="btn btn-dark mt-5" name="submit">Submit</button>
+      <button type="submit" class="btn btn-dark mt-5" name="submit">Dodaj</button>
       <button class="btn btn-danger mt-5">
-            <a href="display.php" class="text-light text-decoration-none">Cancel</a>
+            <a href="display.php?user_id=<?php echo $userId; ?>" class="text-light text-decoration-none">Anuluj</a>
       </button>
     </form>
   </div>

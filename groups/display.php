@@ -19,9 +19,9 @@ $userId = $_GET['user_id'];
 <body>
     <div class="container">
         <button class="btn btn-dark my-5">
-            <a href="group.php" class="text-light text-decoration-none">Dodaj</a>
+            <a href="group.php?user_id=<?php echo $userId; ?>" class="text-light text-decoration-none">Dodaj</a>
         </button>
-        <a href="..\index.php<?php if (isset($_GET['user_id'])) echo '?user_id=' . $_GET['user_id']; ?>"
+        <a href="..\index.php?user_id=<?php echo $userId; ?>"
             class="btn btn-dark text-white text-decoration-none" role="button">
             Powrót
         </a>
@@ -53,10 +53,10 @@ $userId = $_GET['user_id'];
                             <td>'.$name.'</td>
                             <td>
                                 <button class="btn btn-dark">
-                                    <a href="update.php?updateid='.$id.'" class="text-light text-decoration-none">Edytuj</a></button>
+                                    <a href="update.php?updateid='.$id.'&user_id='.$userId.'" class="text-light text-decoration-none">Edytuj</a></button>
                                 </button>
                                 <button class="btn btn-danger">
-                                    <a href="delete.php?deleteid='.$id.'" class="text-light text-decoration-none">Usuń</a></button>
+                                    <a href="delete.php?deleteid='.$id.'&user_id='.$userId.'" class="text-light text-decoration-none">Usuń</a></button>
                                 </button>
                             </td>
                         </tr>';
