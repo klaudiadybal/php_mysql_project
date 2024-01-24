@@ -1,7 +1,8 @@
 <?php
 include '..\connect.php';
 
-$userId = $_GET['user_id'];
+$userId = isset($_GET['user_id']) ? $_GET['user_id'] : null;
+
 
 if (isset($userId)) {
     $redirectUrl = 'display.php?user_id=' . $userId;
@@ -16,8 +17,7 @@ if (isset($userId)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harmonogramy</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
@@ -28,6 +28,21 @@ if (isset($userId)) {
             <button class="btn btn-dark my-5">
                 <a href="../index.php" class="text-light text-decoration-none">Powrót</a>
             </button>
+
+            <?php
+            session_start();
+
+            if (!isset($_SESSION['user_id'])) {
+                echo ' <form action="search.php" method="get" class="mb-3">
+            <div class="input-group">
+                <input type="text" id="search" name="query" class="form-control" placeholder="Wyszukaj" required>
+                <button type="submit" class="btn btn-dark">Szukaj</button>
+            </div>
+        </form>';
+            }
+
+            ?>
+
             <table class="table table-bordered table-striped text-center">
                 <thead>
                     <tr>

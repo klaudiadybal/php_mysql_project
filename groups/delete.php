@@ -6,7 +6,7 @@
     if(isset($_GET['deleteid'])){
         $id=$_GET['deleteid'];
 
-        $sql="delete from `grupy` where id=$id";
+        $sql="DELETE FROM `grupy` WHERE id=$id";
         $result=mysqli_query($connection, $sql);
 
         if($result) {

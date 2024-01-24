@@ -1,7 +1,8 @@
 <?php
 include '../connect.php';
 
-$userId = $_GET['user_id'];
+$userId = isset($_GET['user_id']) ? $_GET['user_id'] : null;
+
 
 if (isset($_POST['submit'])) {
     $idKursu = $_POST['id_kursu'];

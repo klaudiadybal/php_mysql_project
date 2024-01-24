@@ -1,13 +1,37 @@
 <?php
 include '../connect.php';
+session_start();
 
 $userId = isset($_GET['user_id']) ? $_GET['user_id'] : null;
-
 
 if (isset($userId)) {
     $redirectUrl = 'display.php?user_id=' . $userId;
     header('Location: ' . $redirectUrl);
+    exit();
 }
+
+$searchResults = [];
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['query'])) {
+    $query = mysqli_real_escape_string($connection, $_GET['query']);
+
+    $sql = "SELECT * FROM `nauczyciele` WHERE 
+            imie LIKE '%$query%' OR 
+            nazwisko LIKE '%$query%' OR 
+            adres_email LIKE '%$query%' OR 
+            numer_telefonu LIKE '%$query%'";
+
+    $result = mysqli_query($connection, $sql);
+
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $searchResults[] = $row;
+        }
+    } else {
+        echo "Błąd zapytania: " . mysqli_error($connection);
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -23,12 +47,10 @@ if (isset($userId)) {
 <body>
     <div class="container">
         <button class="btn btn-dark my-5">
-            <a href="../index.php" class="text-light text-decoration-none">Powrót</a>
+            <a href="../teachers/view.php" class="text-light text-decoration-none">Powrót</a>
         </button>
 
         <?php
-        session_start();
-
         if (!isset($_SESSION['user_id'])) {
             echo ' <form action="search.php" method="get" class="mb-3">
             <div class="input-group">
@@ -53,23 +75,19 @@ if (isset($userId)) {
             <tbody>
 
                 <?php
-                $sql = "select * from `nauczyciele`";
-                $result = mysqli_query($connection, $sql);
-                if ($result) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $id = $row['id'];
-                        $name = $row['imie'];
-                        $last_name = $row['nazwisko'];
-                        $email = $row['adres_email'];
-                        $phone = $row['numer_telefonu'];
-                        echo '<tr>
-                            <th scope="row">' . $id . '</th>
-                            <td>' . $name . '</td>
-                            <td>' . $last_name . '</td>
-                            <td>' . $email . '</td>
-                            <td>' . $phone . '</td>
-                        </tr>';
-                    }
+                foreach ($searchResults as $row) {
+                    $id = $row['id'];
+                    $name = $row['imie'];
+                    $last_name = $row['nazwisko'];
+                    $email = $row['adres_email'];
+                    $phone = $row['numer_telefonu'];
+                    echo '<tr>
+                        <th scope="row">' . $id . '</th>
+                        <td>' . $name . '</td>
+                        <td>' . $last_name . '</td>
+                        <td>' . $email . '</td>
+                        <td>' . $phone . '</td>
+                    </tr>';
                 }
                 ?>
             </tbody>

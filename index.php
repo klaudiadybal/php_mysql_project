@@ -1,6 +1,6 @@
 <?php
 
-$userId = $_GET['user_id'];
+$userId = isset($_GET['user_id']) ? $_GET['user_id'] : null;
 
 if (isset($userId)) {
     echo '<div class="m-5">
